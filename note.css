@@ -1,0 +1,72 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.note_wrapper{
+    width:50%;
+    background: linear-gradient(to right, grey, gray);
+    margin:0 auto;
+    padding: 2em;
+}
+.content{
+    text-align: center;
+    padding: 1em;
+    border:.5em dotted plum;
+}
+.content a{
+    text-decoration: none;
+    border: 1px solid black;
+    background-color: cadetblue;
+}
+.title, .note{
+    text-align:left;
+    color:azure;
+    margin-bottom: 2rem;
+}
+.title input[type="text"]{
+    padding:.5rem;
+    width:100%;
+    border:none;
+    outline:none;
+    font-weight: bold;
+    font-size: larger;
+}
+.note textarea{
+    width:100%;
+    height: 8rem;
+    padding: .2em;
+    text-align: justify;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: lighter;
+    font-size: large;
+    border:none;
+    outline: none;
+}
+.jcontent{
+    background-color: brown;
+    overflow-wrap: break-word;
+}
+.author{
+    color:white;
+    width:100%;
+    text-align: left;
+}
+.author input[type="text"]{
+    padding: .5rem;
+    width:100%;
+    border: none;
+    outline: none;
+    margin-bottom: .4rem;
+}
+.buttons button{
+    margin: 0 5rem 0 5rem;
+    border:none;
+    outline:none;
+    padding: .5rem;
+    background-color: plum;
+}
+.buttons .save:hover, .delete:hover{
+    background-color: rgb(58, 120, 172);
+    color:blue;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <meta name="author" description="note taking app">
+        <link rel="stylesheet" href="note.css">
+        <title>noteApp/cke_editor</title> 
+    </head>
+    <body>
+        <div class="note_wrapper">
+            <div class="content">
+                <h3 class="info">Your note list is empty</h3>
+                <div class="title">
+                    <h3>TITLE:</h3><input type="text" placeholder="TITLE" id="title">  
+                </div>
+                <div class="note_wrapper"></div>
+            </div>
+            <footer></footer>   
+        </div>
+        <script type="text/javaScript">
+           let readNote = localStorage.getItem("readNote");
+           if(readNote == null || readNote == undefined){
+               location.href = 'notel.html';
+           }else{
+               readNote = JSON.parse(readNote)
+               let note_wrapper = document.querySelector('.note_wrapper');
+               let noteCode = "";
+               noteCode += `<div class="title">
+                                <h3>TITLE:</h3><input type="text" value="${readNote['title']}">  
+                           </div>`
+               noteCode += `<div class="note">
+                                  <h3>CONTENT:</h3> ${readNote['content']};                                             
+                            </div>`
+               noteCode += ` <div class="author">
+                                   <h3>AUTHOR:</h3><input type="text" value="${readNote['author']}">
+                            </div>`
+               noteCode += `<div class="buttons">
+                                   <button type="button" class="delete" onclick="deleteNote(${readNote['date_created']})">Delete</button>
+                                   <span><a href="notel.html">Back</a></span>
+                            </div>`
+                            note_wrapper.innerHTML = noteCode;
+           }     
+        </script>
+    </body>
+</html>

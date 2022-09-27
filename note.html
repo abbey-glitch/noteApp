@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <meta name="author" description="note taking app">
+        <link rel="stylesheet" href="note.css">
+        <title>noteApp/cke_editor</title> 
+    </head>
+    <body>
+        <div class="note_wrapper">
+            <div class="content">
+                <h3 class="info">Your note list is empty</h3>
+                <div class="title">
+                    <h3>TITLE:</h3><input type="text" placeholder="TITLE" id="title">  
+                </div>
+                <div class="note">
+                    <h3>CONTENT:</h3><textarea id="noteContent">
+                       
+                    </textarea>
+                    <a href="notel.html">Edit</a>
+                </div>
+                <div class="author">
+                    <h3>AUTHOR</h3><input type="text" placeholder="author name" id="author">
+                </div>
+                <div class="buttons">
+                    <button type="button" class="save">Save</button>
+                    <span class="saveInfo"></span>
+                    <button type="button" class="delete">Delete</button>
+                </div>
+            </div>
+            <footer></footer>   
+        </div>
+        <script>
+            const save = document.querySelector('.save')
+            save.addEventListener('click', function(){
+                let title = document.getElementById('title').value;
+                let content = document.getElementById('noteContent').value;
+                let author = document.getElementById('author').value;
+                title = title.trim();
+                content = content.trim();
+                author = author.trim();
+                if(title.length == 0 || content.length == 0 || author.length == 0){
+                    let info = document.querySelector('.info');
+                    info.innerText = 'Can not save blank';
+                    info.style.backgroundColor = 'red';
+                }else{
+                    const date = new Date();
+                    const time = date.getTime();
+                    let note = {
+                        'title':title,
+                        'content':content,
+                        'author':author,
+                        'date_created':date,
+                        'time_created':time,
+                    }
+                    note = JSON.stringify(note);
+                    savedNote(note);
+                }
+            })
+            
+            function savedNote(note){
+                let notes = localStorage.getItem("notes");
+                if(notes == null || notes == undefined){
+                    let notes = [];
+                    notes.push(note)
+                    //notes save
+                    notes = JSON.stringify(notes);
+                    localStorage.setItem("notes", notes);
+                    //inform the user
+                    let info = document.querySelector('.info');
+                    info.innerText = 'Your first note saved!' 
+                    info.style.backgroundColor = 'green';
+                    info.style.color = 'white';
+                    let saveInfo = document.querySelector('.saveInfo')
+                    saveInfo.innerText = 'Successful'
+                    saveInfo.style.backgroundColor = 'greenYellow'
+                }else{
+                    notes = localStorage.getItem("notes");
+                    notes = JSON.parse(notes);
+                    notes.push(note)
+                    //save note
+                    notes = JSON.stringify(notes);
+                    localStorage.setItem('notes', notes);
+                    let info = document.querySelector('.info');
+                    info.innerText = 'Note saved!'
+                    info.style.backgroundColor = 'orange'
+                    let saveInfo = document.querySelector('.saveInfo')
+                    saveInfo.innerText = 'Successful'
+                    saveInfo.style.backgroundColor = 'Yellow'
+                }
+                
+            }
+        </script>
+    </body>
+</html>
